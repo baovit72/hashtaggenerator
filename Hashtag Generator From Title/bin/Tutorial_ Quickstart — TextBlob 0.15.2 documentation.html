@@ -1,0 +1,543 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0077)https://textblob.readthedocs.io/en/dev/quickstart.html#noun-phrase-extraction -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    
+    <title>Tutorial: Quickstart — TextBlob 0.15.2 documentation</title>
+    <link rel="stylesheet" href="./Tutorial_ Quickstart — TextBlob 0.15.2 documentation_files/flasky.css" type="text/css">
+    <link rel="stylesheet" href="./Tutorial_ Quickstart — TextBlob 0.15.2 documentation_files/pygments.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="./Tutorial_ Quickstart — TextBlob 0.15.2 documentation_files/badge_only.css">
+    <script async="" src="./Tutorial_ Quickstart — TextBlob 0.15.2 documentation_files/analytics.js.download"></script><script type="text/javascript" id="documentation_options" data-url_root="./" src="./Tutorial_ Quickstart — TextBlob 0.15.2 documentation_files/documentation_options.js.download"></script>
+    <script type="text/javascript" src="./Tutorial_ Quickstart — TextBlob 0.15.2 documentation_files/jquery.js.download"></script>
+    <script type="text/javascript" src="./Tutorial_ Quickstart — TextBlob 0.15.2 documentation_files/underscore.js.download"></script>
+    <script type="text/javascript" src="./Tutorial_ Quickstart — TextBlob 0.15.2 documentation_files/doctools.js.download"></script>
+    <script type="text/javascript" src="./Tutorial_ Quickstart — TextBlob 0.15.2 documentation_files/language_data.js.download"></script>
+    <script type="text/javascript" src="./Tutorial_ Quickstart — TextBlob 0.15.2 documentation_files/readthedocs-doc-embed.js.download"></script>
+    <link rel="index" title="Index" href="https://textblob.readthedocs.io/en/dev/genindex.html">
+    <link rel="search" title="Search" href="https://textblob.readthedocs.io/en/dev/search.html">
+    <link rel="next" title="Tutorial: Building a Text Classification System" href="https://textblob.readthedocs.io/en/dev/classifiers.html">
+    <link rel="prev" title="Installation" href="https://textblob.readthedocs.io/en/dev/install.html">
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  
+<!-- RTD Extra Head -->
+
+<!-- 
+Always link to the latest version, as canonical.
+http://docs.readthedocs.org/en/latest/canonical.html
+-->
+<link rel="canonical" href="https://textblob.readthedocs.io/en/dev/quickstart.html">
+
+<link rel="stylesheet" href="./Tutorial_ Quickstart — TextBlob 0.15.2 documentation_files/readthedocs-doc-embed.css" type="text/css">
+
+<script type="text/javascript" src="./Tutorial_ Quickstart — TextBlob 0.15.2 documentation_files/readthedocs-data.js.download"></script>
+
+<!-- Add page-specific data, which must exist in the page js, not global -->
+<script type="text/javascript">
+READTHEDOCS_DATA['page'] = 'quickstart'
+READTHEDOCS_DATA['source_suffix'] = '.rst'
+</script>
+
+<script type="text/javascript" src="./Tutorial_ Quickstart — TextBlob 0.15.2 documentation_files/readthedocs-analytics.js.download"></script>
+
+<!-- end RTD <extrahead> -->
+</head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="https://textblob.readthedocs.io/en/dev/genindex.html" title="General Index" accesskey="I">index</a></li>
+        <li class="right">
+          <a href="https://textblob.readthedocs.io/en/dev/py-modindex.html" title="Python Module Index">modules</a> |</li>
+        <li class="right">
+          <a href="https://textblob.readthedocs.io/en/dev/classifiers.html" title="Tutorial: Building a Text Classification System" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="https://textblob.readthedocs.io/en/dev/install.html" title="Installation" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="https://textblob.readthedocs.io/en/dev/index.html">TextBlob 0.15.2 documentation</a> »</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-textblob.blob">
+<span id="tutorial-quickstart"></span><span id="quickstart"></span><h1>Tutorial: Quickstart<a class="headerlink" href="https://textblob.readthedocs.io/en/dev/quickstart.html#module-textblob.blob" title="Permalink to this headline">¶</a></h1>
+<p>TextBlob aims to provide access to common text-processing operations through a familiar interface. You can treat <a class="reference internal" href="https://textblob.readthedocs.io/en/dev/api_reference.html#textblob.blob.TextBlob" title="textblob.blob.TextBlob"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextBlob</span></code></a> objects as if they were Python strings that learned how to do Natural Language Processing.</p>
+<div class="section" id="create-a-textblob">
+<h2>Create a TextBlob<a class="headerlink" href="https://textblob.readthedocs.io/en/dev/quickstart.html#create-a-textblob" title="Permalink to this headline">¶</a></h2>
+<p>First, the import.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">textblob</span> <span class="kn">import</span> <span class="n">TextBlob</span>
+</pre></div>
+</div>
+<p>Let’s create our first <a class="reference internal" href="https://textblob.readthedocs.io/en/dev/api_reference.html#textblob.blob.TextBlob" title="textblob.blob.TextBlob"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextBlob</span></code></a>.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">wiki</span> <span class="o">=</span> <span class="n">TextBlob</span><span class="p">(</span><span class="s2">"Python is a high-level, general-purpose programming language."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="part-of-speech-tagging">
+<h2>Part-of-speech Tagging<a class="headerlink" href="https://textblob.readthedocs.io/en/dev/quickstart.html#part-of-speech-tagging" title="Permalink to this headline">¶</a></h2>
+<p>Part-of-speech tags can be accessed through the <a class="reference internal" href="https://textblob.readthedocs.io/en/dev/api_reference.html#textblob.blob.TextBlob.tags" title="textblob.blob.TextBlob.tags"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tags</span></code></a> property.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">wiki</span><span class="o">.</span><span class="n">tags</span>
+<span class="go">[('Python', 'NNP'), ('is', 'VBZ'), ('a', 'DT'), ('high-level', 'JJ'), ('general-purpose', 'JJ'), ('programming', 'NN'), ('language', 'NN')]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="noun-phrase-extraction">
+<h2>Noun Phrase Extraction<a class="headerlink" href="https://textblob.readthedocs.io/en/dev/quickstart.html#noun-phrase-extraction" title="Permalink to this headline">¶</a></h2>
+<p>Similarly, noun phrases are accessed through the <a class="reference internal" href="https://textblob.readthedocs.io/en/dev/api_reference.html#textblob.blob.TextBlob.noun_phrases" title="textblob.blob.TextBlob.noun_phrases"><code class="xref py py-meth docutils literal notranslate"><span class="pre">noun_phrases</span></code></a> property.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">wiki</span><span class="o">.</span><span class="n">noun_phrases</span>
+<span class="go">WordList(['python'])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sentiment-analysis">
+<h2>Sentiment Analysis<a class="headerlink" href="https://textblob.readthedocs.io/en/dev/quickstart.html#sentiment-analysis" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="https://textblob.readthedocs.io/en/dev/api_reference.html#textblob.blob.TextBlob.sentiment" title="textblob.blob.TextBlob.sentiment"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sentiment</span></code></a> property returns a namedtuple of the form <code class="docutils literal notranslate"><span class="pre">Sentiment(polarity,</span> <span class="pre">subjectivity)</span></code>. The polarity score is a float within the range [-1.0, 1.0]. The subjectivity is a float within the range [0.0, 1.0] where 0.0 is very objective and 1.0 is very subjective.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">testimonial</span> <span class="o">=</span> <span class="n">TextBlob</span><span class="p">(</span><span class="s2">"Textblob is amazingly simple to use. What great fun!"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">testimonial</span><span class="o">.</span><span class="n">sentiment</span>
+<span class="go">Sentiment(polarity=0.39166666666666666, subjectivity=0.4357142857142857)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">testimonial</span><span class="o">.</span><span class="n">sentiment</span><span class="o">.</span><span class="n">polarity</span>
+<span class="go">0.39166666666666666</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tokenization">
+<h2>Tokenization<a class="headerlink" href="https://textblob.readthedocs.io/en/dev/quickstart.html#tokenization" title="Permalink to this headline">¶</a></h2>
+<p>You can break TextBlobs into words or sentences.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">zen</span> <span class="o">=</span> <span class="n">TextBlob</span><span class="p">(</span><span class="s2">"Beautiful is better than ugly. "</span>
+<span class="gp">... </span>               <span class="s2">"Explicit is better than implicit. "</span>
+<span class="gp">... </span>               <span class="s2">"Simple is better than complex."</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zen</span><span class="o">.</span><span class="n">words</span>
+<span class="go">WordList(['Beautiful', 'is', 'better', 'than', 'ugly', 'Explicit', 'is', 'better', 'than', 'implicit', 'Simple', 'is', 'better', 'than', 'complex'])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zen</span><span class="o">.</span><span class="n">sentences</span>
+<span class="go">[Sentence("Beautiful is better than ugly."), Sentence("Explicit is better than implicit."), Sentence("Simple is better than complex.")]</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="https://textblob.readthedocs.io/en/dev/api_reference.html#textblob.blob.Sentence" title="textblob.blob.Sentence"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sentence</span></code></a> objects have the same properties and methods as TextBlobs.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">zen</span><span class="o">.</span><span class="n">sentences</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">sentence</span><span class="o">.</span><span class="n">sentiment</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For more advanced tokenization, see the <a class="reference internal" href="https://textblob.readthedocs.io/en/dev/advanced_usage.html#advanced"><span class="std std-ref">Advanced Usage</span></a> guide.</p>
+</div>
+<div class="section" id="words-inflection-and-lemmatization">
+<h2>Words Inflection and Lemmatization<a class="headerlink" href="https://textblob.readthedocs.io/en/dev/quickstart.html#words-inflection-and-lemmatization" title="Permalink to this headline">¶</a></h2>
+<p>Each word in <a class="reference internal" href="https://textblob.readthedocs.io/en/dev/api_reference.html#textblob.blob.TextBlob.words" title="textblob.blob.TextBlob.words"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TextBlob.words</span></code></a> or <a class="reference internal" href="https://textblob.readthedocs.io/en/dev/api_reference.html#textblob.blob.Sentence.words" title="textblob.blob.Sentence.words"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Sentence.words</span></code></a> is a <a class="reference internal" href="https://textblob.readthedocs.io/en/dev/api_reference.html#textblob.blob.Word" title="textblob.blob.Word"><code class="xref py py-class docutils literal notranslate"><span class="pre">Word</span></code></a>
+object (a subclass of <code class="docutils literal notranslate"><span class="pre">unicode</span></code>) with useful methods, e.g. for word inflection.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sentence</span> <span class="o">=</span> <span class="n">TextBlob</span><span class="p">(</span><span class="s1">'Use 4 spaces per indentation level.'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sentence</span><span class="o">.</span><span class="n">words</span>
+<span class="go">WordList(['Use', '4', 'spaces', 'per', 'indentation', 'level'])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sentence</span><span class="o">.</span><span class="n">words</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">singularize</span><span class="p">()</span>
+<span class="go">'space'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sentence</span><span class="o">.</span><span class="n">words</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">pluralize</span><span class="p">()</span>
+<span class="go">'levels'</span>
+</pre></div>
+</div>
+<p>Words can be lemmatized by calling the <a class="reference internal" href="https://textblob.readthedocs.io/en/dev/api_reference.html#textblob.blob.Word.lemmatize" title="textblob.blob.Word.lemmatize"><code class="xref py py-meth docutils literal notranslate"><span class="pre">lemmatize</span></code></a> method.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">textblob</span> <span class="kn">import</span> <span class="n">Word</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span> <span class="o">=</span> <span class="n">Word</span><span class="p">(</span><span class="s2">"octopi"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">()</span>
+<span class="go">'octopus'</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span> <span class="o">=</span> <span class="n">Word</span><span class="p">(</span><span class="s2">"went"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">(</span><span class="s2">"v"</span><span class="p">)</span>  <span class="c1"># Pass in WordNet part of speech (verb)</span>
+<span class="go">'go'</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="wordnet-integration">
+<h2>WordNet Integration<a class="headerlink" href="https://textblob.readthedocs.io/en/dev/quickstart.html#wordnet-integration" title="Permalink to this headline">¶</a></h2>
+<p>You can access the synsets for a <a class="reference internal" href="https://textblob.readthedocs.io/en/dev/api_reference.html#textblob.blob.Word" title="textblob.blob.Word"><code class="xref py py-class docutils literal notranslate"><span class="pre">Word</span></code></a> via the <a class="reference internal" href="https://textblob.readthedocs.io/en/dev/api_reference.html#textblob.blob.Word.synsets" title="textblob.blob.Word.synsets"><code class="xref py py-meth docutils literal notranslate"><span class="pre">synsets</span></code></a> property or the <a class="reference internal" href="https://textblob.readthedocs.io/en/dev/api_reference.html#textblob.blob.Word.get_synsets" title="textblob.blob.Word.get_synsets"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_synsets</span></code></a> method, optionally passing in a part of speech.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">textblob</span> <span class="kn">import</span> <span class="n">Word</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">textblob.wordnet</span> <span class="kn">import</span> <span class="n">VERB</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">word</span> <span class="o">=</span> <span class="n">Word</span><span class="p">(</span><span class="s2">"octopus"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">word</span><span class="o">.</span><span class="n">synsets</span>
+<span class="go">[Synset('octopus.n.01'), Synset('octopus.n.02')]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Word</span><span class="p">(</span><span class="s2">"hack"</span><span class="p">)</span><span class="o">.</span><span class="n">get_synsets</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">VERB</span><span class="p">)</span>
+<span class="go">[Synset('chop.v.05'), Synset('hack.v.02'), Synset('hack.v.03'), Synset('hack.v.04'), Synset('hack.v.05'), Synset('hack.v.06'), Synset('hack.v.07'), Synset('hack.v.08')]</span>
+</pre></div>
+</div>
+<p>You can access the definitions for each synset via the <a class="reference internal" href="https://textblob.readthedocs.io/en/dev/api_reference.html#textblob.blob.Word.definitions" title="textblob.blob.Word.definitions"><code class="xref py py-meth docutils literal notranslate"><span class="pre">definitions</span></code></a> property or the <a class="reference internal" href="https://textblob.readthedocs.io/en/dev/api_reference.html#textblob.blob.Word.define" title="textblob.blob.Word.define"><code class="xref py py-meth docutils literal notranslate"><span class="pre">define()</span></code></a> method, which can also take an optional part-of-speech argument.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Word</span><span class="p">(</span><span class="s2">"octopus"</span><span class="p">)</span><span class="o">.</span><span class="n">definitions</span>
+<span class="go">['tentacles of octopus prepared as food', 'bottom-living cephalopod having a soft oval body with eight long tentacles']</span>
+</pre></div>
+</div>
+<p>You can also create synsets directly.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">textblob.wordnet</span> <span class="kn">import</span> <span class="n">Synset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">octopus</span> <span class="o">=</span> <span class="n">Synset</span><span class="p">(</span><span class="s1">'octopus.n.02'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shrimp</span> <span class="o">=</span> <span class="n">Synset</span><span class="p">(</span><span class="s1">'shrimp.n.03'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">octopus</span><span class="o">.</span><span class="n">path_similarity</span><span class="p">(</span><span class="n">shrimp</span><span class="p">)</span>
+<span class="go">0.1111111111111111</span>
+</pre></div>
+</div>
+<p>For more information on the WordNet API, see the NLTK documentation on the <a class="reference external" href="http://www.nltk.org/howto/wordnet.html">Wordnet Interface</a>.</p>
+</div>
+<div class="section" id="wordlists">
+<h2>WordLists<a class="headerlink" href="https://textblob.readthedocs.io/en/dev/quickstart.html#wordlists" title="Permalink to this headline">¶</a></h2>
+<p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">WordList</span></code> is just a Python list with additional methods.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">animals</span> <span class="o">=</span> <span class="n">TextBlob</span><span class="p">(</span><span class="s2">"cat dog octopus"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">animals</span><span class="o">.</span><span class="n">words</span>
+<span class="go">WordList(['cat', 'dog', 'octopus'])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">animals</span><span class="o">.</span><span class="n">words</span><span class="o">.</span><span class="n">pluralize</span><span class="p">()</span>
+<span class="go">WordList(['cats', 'dogs', 'octopodes'])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="spelling-correction">
+<h2>Spelling Correction<a class="headerlink" href="https://textblob.readthedocs.io/en/dev/quickstart.html#spelling-correction" title="Permalink to this headline">¶</a></h2>
+<p>Use the <a class="reference internal" href="https://textblob.readthedocs.io/en/dev/api_reference.html#textblob.blob.TextBlob.correct" title="textblob.blob.TextBlob.correct"><code class="xref py py-meth docutils literal notranslate"><span class="pre">correct()</span></code></a> method to attempt spelling correction.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">TextBlob</span><span class="p">(</span><span class="s2">"I havv goood speling!"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">correct</span><span class="p">())</span>
+<span class="go">I have good spelling!</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="https://textblob.readthedocs.io/en/dev/api_reference.html#textblob.blob.Word" title="textblob.blob.Word"><code class="xref py py-class docutils literal notranslate"><span class="pre">Word</span></code></a> objects have a <code class="xref py py-meth docutils literal notranslate"><span class="pre">spellcheck()</span> <span class="pre">Word.spellcheck()</span></code> method that returns a list of <code class="docutils literal notranslate"><span class="pre">(word,</span> <span class="pre">confidence)</span></code> tuples with spelling suggestions.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">textblob</span> <span class="kn">import</span> <span class="n">Word</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span> <span class="o">=</span> <span class="n">Word</span><span class="p">(</span><span class="s1">'falibility'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span><span class="o">.</span><span class="n">spellcheck</span><span class="p">()</span>
+<span class="go">[('fallibility', 1.0)]</span>
+</pre></div>
+</div>
+<p>Spelling correction is based on Peter Norvig’s “How to Write a Spelling Corrector”<a class="footnote-reference" href="https://textblob.readthedocs.io/en/dev/quickstart.html#id4" id="id1">[1]</a> as implemented in the pattern library. It is about 70% accurate <a class="footnote-reference" href="https://textblob.readthedocs.io/en/dev/quickstart.html#id5" id="id2">[2]</a>.</p>
+</div>
+<div class="section" id="get-word-and-noun-phrase-frequencies">
+<h2>Get Word and Noun Phrase Frequencies<a class="headerlink" href="https://textblob.readthedocs.io/en/dev/quickstart.html#get-word-and-noun-phrase-frequencies" title="Permalink to this headline">¶</a></h2>
+<p>There are two ways to get the frequency of a word or noun phrase in a <a class="reference internal" href="https://textblob.readthedocs.io/en/dev/api_reference.html#textblob.blob.TextBlob" title="textblob.blob.TextBlob"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextBlob</span></code></a>.</p>
+<p>The first is through the <code class="docutils literal notranslate"><span class="pre">word_counts</span></code> dictionary.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">monty</span> <span class="o">=</span> <span class="n">TextBlob</span><span class="p">(</span><span class="s2">"We are no longer the Knights who say Ni. "</span>
+<span class="gp">... </span>                    <span class="s2">"We are now the Knights who say Ekki ekki ekki PTANG."</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">monty</span><span class="o">.</span><span class="n">word_counts</span><span class="p">[</span><span class="s1">'ekki'</span><span class="p">]</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+<p>If you access the frequencies this way, the search will <em>not</em> be case sensitive, and words that are not found will have a frequency of 0.</p>
+<p>The second way is to use the <code class="docutils literal notranslate"><span class="pre">count()</span></code> method.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">monty</span><span class="o">.</span><span class="n">words</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">'ekki'</span><span class="p">)</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+<p>You can specify whether or not the search should be case-sensitive (default is <code class="docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">monty</span><span class="o">.</span><span class="n">words</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">'ekki'</span><span class="p">,</span> <span class="n">case_sensitive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<p>Each of these methods can also be used with noun phrases.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">wiki</span><span class="o">.</span><span class="n">noun_phrases</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">'python'</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="translation-and-language-detection">
+<h2>Translation and Language Detection<a class="headerlink" href="https://textblob.readthedocs.io/en/dev/quickstart.html#translation-and-language-detection" title="Permalink to this headline">¶</a></h2>
+<p>New in version <code class="xref py py-obj docutils literal notranslate"><span class="pre">0.5.0</span></code>.</p>
+<p>TextBlobs can be translated between languages.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">en_blob</span> <span class="o">=</span> <span class="n">TextBlob</span><span class="p">(</span><span class="sa">u</span><span class="s1">'Simple is better than complex.'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">en_blob</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">to</span><span class="o">=</span><span class="s1">'es'</span><span class="p">)</span>
+<span class="go">TextBlob("Lo simple es mejor que lo complejo.")</span>
+</pre></div>
+</div>
+<p>If no source language is specified, TextBlob will attempt to detect the language. You can specify the source language explicitly, like so.
+Raises <a class="reference internal" href="https://textblob.readthedocs.io/en/dev/api_reference.html#textblob.exceptions.TranslatorError" title="textblob.exceptions.TranslatorError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TranslatorError</span></code></a> if the TextBlob cannot be translated into the requested language or <a class="reference internal" href="https://textblob.readthedocs.io/en/dev/api_reference.html#textblob.exceptions.NotTranslated" title="textblob.exceptions.NotTranslated"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NotTranslated</span></code></a> if the translated result is the same as the input string.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chinese_blob</span> <span class="o">=</span> <span class="n">TextBlob</span><span class="p">(</span><span class="sa">u</span><span class="s2">"美丽优于丑陋"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chinese_blob</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">from_lang</span><span class="o">=</span><span class="s2">"zh-CN"</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="s1">'en'</span><span class="p">)</span>
+<span class="go">TextBlob("Beauty is better than ugly")</span>
+</pre></div>
+</div>
+<p>You can also attempt to detect a TextBlob’s language using <a class="reference internal" href="https://textblob.readthedocs.io/en/dev/api_reference.html#textblob.blob.TextBlob.detect_language" title="textblob.blob.TextBlob.detect_language"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TextBlob.detect_language()</span></code></a>.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">TextBlob</span><span class="p">(</span><span class="sa">u</span><span class="s2">"بسيط هو أفضل من مجمع"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">detect_language</span><span class="p">()</span>
+<span class="go">'ar'</span>
+</pre></div>
+</div>
+<p>As a reference, language codes can be found <a class="reference external" href="https://developers.google.com/translate/v2/using_rest#language-params">here</a>.</p>
+<p>Language translation and detection is powered by the <a class="reference external" href="https://developers.google.com/translate/">Google Translate API</a>.</p>
+</div>
+<div class="section" id="parsing">
+<h2>Parsing<a class="headerlink" href="https://textblob.readthedocs.io/en/dev/quickstart.html#parsing" title="Permalink to this headline">¶</a></h2>
+<p>Use the <a class="reference internal" href="https://textblob.readthedocs.io/en/dev/api_reference.html#textblob.blob.TextBlob.parse" title="textblob.blob.TextBlob.parse"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse()</span></code></a> method to parse the text.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">TextBlob</span><span class="p">(</span><span class="s2">"And now for something completely different."</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">parse</span><span class="p">())</span>
+<span class="go">And/CC/O/O now/RB/B-ADVP/O for/IN/B-PP/B-PNP something/NN/B-NP/I-PNP completely/RB/B-ADJP/O different/JJ/I-ADJP/O ././O/O</span>
+</pre></div>
+</div>
+<p>By default, TextBlob uses pattern’s parser <a class="footnote-reference" href="https://textblob.readthedocs.io/en/dev/quickstart.html#id6" id="id3">[3]</a>.</p>
+</div>
+<div class="section" id="textblobs-are-like-python-strings">
+<h2>TextBlobs Are Like Python Strings!<a class="headerlink" href="https://textblob.readthedocs.io/en/dev/quickstart.html#textblobs-are-like-python-strings" title="Permalink to this headline">¶</a></h2>
+<p>You can use Python’s substring syntax.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">zen</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">19</span><span class="p">]</span>
+<span class="go">TextBlob("Beautiful is better")</span>
+</pre></div>
+</div>
+<p>You can use common string methods.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">zen</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="go">TextBlob("BEAUTIFUL IS BETTER THAN UGLY. EXPLICIT IS BETTER THAN IMPLICIT. SIMPLE IS BETTER THAN COMPLEX.")</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zen</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"Simple"</span><span class="p">)</span>
+<span class="go">65</span>
+</pre></div>
+</div>
+<p>You can make comparisons between TextBlobs and strings.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">apple_blob</span> <span class="o">=</span> <span class="n">TextBlob</span><span class="p">(</span><span class="s1">'apples'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">banana_blob</span> <span class="o">=</span> <span class="n">TextBlob</span><span class="p">(</span><span class="s1">'bananas'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">apple_blob</span> <span class="o">&lt;</span> <span class="n">banana_blob</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">apple_blob</span> <span class="o">==</span> <span class="s1">'apples'</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>You can concatenate and interpolate TextBlobs and strings.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">apple_blob</span> <span class="o">+</span> <span class="s1">' and '</span> <span class="o">+</span> <span class="n">banana_blob</span>
+<span class="go">TextBlob("apples and bananas")</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">"{0} and {1}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">apple_blob</span><span class="p">,</span> <span class="n">banana_blob</span><span class="p">)</span>
+<span class="go">'apples and bananas'</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="n-grams">
+<h2><code class="xref py py-obj docutils literal notranslate"><span class="pre">n</span></code>-grams<a class="headerlink" href="https://textblob.readthedocs.io/en/dev/quickstart.html#n-grams" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="https://textblob.readthedocs.io/en/dev/api_reference.html#textblob.blob.TextBlob.ngrams" title="textblob.blob.TextBlob.ngrams"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextBlob.ngrams()</span></code></a> method returns a list of tuples of <code class="xref py py-obj docutils literal notranslate"><span class="pre">n</span></code> successive words.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">blob</span> <span class="o">=</span> <span class="n">TextBlob</span><span class="p">(</span><span class="s2">"Now is better than never."</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blob</span><span class="o">.</span><span class="n">ngrams</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">[WordList(['Now', 'is', 'better']), WordList(['is', 'better', 'than']), WordList(['better', 'than', 'never'])]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-start-and-end-indices-of-sentences">
+<h2>Get Start and End Indices of Sentences<a class="headerlink" href="https://textblob.readthedocs.io/en/dev/quickstart.html#get-start-and-end-indices-of-sentences" title="Permalink to this headline">¶</a></h2>
+<p>Use <code class="docutils literal notranslate"><span class="pre">sentence.start</span></code> and <code class="docutils literal notranslate"><span class="pre">sentence.end</span></code> to get the indices where a sentence starts and ends within a <a class="reference internal" href="https://textblob.readthedocs.io/en/dev/api_reference.html#textblob.blob.TextBlob" title="textblob.blob.TextBlob"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextBlob</span></code></a>.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">zen</span><span class="o">.</span><span class="n">sentences</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">"---- Starts at index {}, Ends at index {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">end</span><span class="p">))</span>
+<span class="go">Beautiful is better than ugly.</span>
+<span class="go">---- Starts at index 0, Ends at index 30</span>
+<span class="go">Explicit is better than implicit.</span>
+<span class="go">---- Starts at index 31, Ends at index 64</span>
+<span class="go">Simple is better than complex.</span>
+<span class="go">---- Starts at index 65, Ends at index 95</span>
+</pre></div>
+</div>
+<div class="section" id="next-steps">
+<h3>Next Steps<a class="headerlink" href="https://textblob.readthedocs.io/en/dev/quickstart.html#next-steps" title="Permalink to this headline">¶</a></h3>
+<p>Want to build your own text classification system? Check out the <a class="reference internal" href="https://textblob.readthedocs.io/en/dev/classifiers.html#classifiers"><span class="std std-ref">Classifiers Tutorial</span></a>.</p>
+<p>Want to use a different POS tagger or noun phrase chunker implementation? Check out the <a class="reference internal" href="https://textblob.readthedocs.io/en/dev/advanced_usage.html#advanced"><span class="std std-ref">Advanced Usage</span></a> guide.</p>
+<div class="wy-table-responsive footnote"><table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="https://textblob.readthedocs.io/en/dev/quickstart.html#id1">[1]</a></td><td><a class="reference external" href="http://norvig.com/spell-correct.html">http://norvig.com/spell-correct.html</a></td></tr>
+</tbody>
+</table></div>
+<div class="wy-table-responsive footnote"><table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="https://textblob.readthedocs.io/en/dev/quickstart.html#id2">[2]</a></td><td><a class="reference external" href="http://www.clips.ua.ac.be/pages/pattern-en#spelling">http://www.clips.ua.ac.be/pages/pattern-en#spelling</a></td></tr>
+</tbody>
+</table></div>
+<div class="wy-table-responsive footnote"><table class="docutils footnote" frame="void" id="id6" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="https://textblob.readthedocs.io/en/dev/quickstart.html#id3">[3]</a></td><td><a class="reference external" href="http://www.clips.ua.ac.be/pages/pattern-en#parser">http://www.clips.ua.ac.be/pages/pattern-en#parser</a></td></tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><p class="logo">
+  <a href="https://textblob.readthedocs.io/en/dev/index.html"><img class="logo" src="./Tutorial_ Quickstart — TextBlob 0.15.2 documentation_files/textblob-logo.png" height="200" width="230" alt="Logo"></a>
+</p>
+
+<p>
+  <iframe src="./Tutorial_ Quickstart — TextBlob 0.15.2 documentation_files/github-btn.html" allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+<p>
+TextBlob is a Python (2 and 3) library for processing textual data. It provides a consistent API for diving into common natural language processing (NLP) tasks such as part-of-speech tagging, noun phrase extraction, sentiment analysis, and more.
+</p>
+
+
+<h3>Useful Links</h3>
+<ul>
+  <li><a href="https://pypi.python.org/pypi/textblob">TextBlob @ PyPI</a></li>
+  <li><a href="https://github.com/sloria/textblob">TextBlob @ GitHub</a></li>
+  <li><a href="https://github.com/sloria/textblob/issues">Issue Tracker</a></li>
+</ul>
+  <h3><a href="https://textblob.readthedocs.io/en/dev/index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="https://textblob.readthedocs.io/en/dev/quickstart.html#">Tutorial: Quickstart</a><ul>
+<li><a class="reference internal" href="https://textblob.readthedocs.io/en/dev/quickstart.html#create-a-textblob">Create a TextBlob</a></li>
+<li><a class="reference internal" href="https://textblob.readthedocs.io/en/dev/quickstart.html#part-of-speech-tagging">Part-of-speech Tagging</a></li>
+<li><a class="reference internal" href="https://textblob.readthedocs.io/en/dev/quickstart.html#noun-phrase-extraction">Noun Phrase Extraction</a></li>
+<li><a class="reference internal" href="https://textblob.readthedocs.io/en/dev/quickstart.html#sentiment-analysis">Sentiment Analysis</a></li>
+<li><a class="reference internal" href="https://textblob.readthedocs.io/en/dev/quickstart.html#tokenization">Tokenization</a></li>
+<li><a class="reference internal" href="https://textblob.readthedocs.io/en/dev/quickstart.html#words-inflection-and-lemmatization">Words Inflection and Lemmatization</a></li>
+<li><a class="reference internal" href="https://textblob.readthedocs.io/en/dev/quickstart.html#wordnet-integration">WordNet Integration</a></li>
+<li><a class="reference internal" href="https://textblob.readthedocs.io/en/dev/quickstart.html#wordlists">WordLists</a></li>
+<li><a class="reference internal" href="https://textblob.readthedocs.io/en/dev/quickstart.html#spelling-correction">Spelling Correction</a></li>
+<li><a class="reference internal" href="https://textblob.readthedocs.io/en/dev/quickstart.html#get-word-and-noun-phrase-frequencies">Get Word and Noun Phrase Frequencies</a></li>
+<li><a class="reference internal" href="https://textblob.readthedocs.io/en/dev/quickstart.html#translation-and-language-detection">Translation and Language Detection</a></li>
+<li><a class="reference internal" href="https://textblob.readthedocs.io/en/dev/quickstart.html#parsing">Parsing</a></li>
+<li><a class="reference internal" href="https://textblob.readthedocs.io/en/dev/quickstart.html#textblobs-are-like-python-strings">TextBlobs Are Like Python Strings!</a></li>
+<li><a class="reference internal" href="https://textblob.readthedocs.io/en/dev/quickstart.html#n-grams"><code class="docutils literal notranslate"><span class="pre">n</span></code>-grams</a></li>
+<li><a class="reference internal" href="https://textblob.readthedocs.io/en/dev/quickstart.html#get-start-and-end-indices-of-sentences">Get Start and End Indices of Sentences</a><ul>
+<li><a class="reference internal" href="https://textblob.readthedocs.io/en/dev/quickstart.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="https://textblob.readthedocs.io/en/dev/index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="https://textblob.readthedocs.io/en/dev/install.html" title="previous chapter">Installation</a></li>
+      <li>Next: <a href="https://textblob.readthedocs.io/en/dev/classifiers.html" title="next chapter">Tutorial: Building a Text Classification System</a></li>
+  </ul></li>
+</ul>
+<div id="searchbox" style="" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="https://textblob.readthedocs.io/en/dev/search.html" method="get">
+      <input type="text" name="q">
+      <input type="submit" value="Go">
+      <input type="hidden" name="check_keywords" value="yes">
+      <input type="hidden" name="area" value="default">
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      © Copyright 2018 <a href="http://stevenloria.com/">Steven Loria</a>.
+    </div>
+    <a href="https://github.com/sloria/textblob" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="./Tutorial_ Quickstart — TextBlob 0.15.2 documentation_files/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" class="github">
+    </a>
+  
+<div id="rtd-ommicnknl"></div><!-- Inserted RTD Footer -->
+
+<div class="injected">
+
+  
+  <div class="rst-versions rst-badge" data-toggle="rst-versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">&nbsp;</span>
+      v: dev
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+
+      
+      
+      
+      <dl>
+        <dt>Versions</dt>
+        
+        
+        <dd><a href="https://textblob.readthedocs.io/en/latest/quickstart.html">latest</a></dd>
+        
+        
+        
+        <dd><a href="https://textblob.readthedocs.io/en/stable/quickstart.html">stable</a></dd>
+        
+        
+         <strong> 
+        <dd><a href="https://textblob.readthedocs.io/en/dev/quickstart.html">dev</a></dd>
+         </strong> 
+        
+      </dl>
+      
+      
+
+      
+      
+      <dl>
+        <dt>Downloads</dt>
+        
+        <dd><a href="https://textblob.readthedocs.io/_/downloads/en/dev/pdf/">PDF</a></dd>
+        
+        <dd><a href="https://textblob.readthedocs.io/_/downloads/en/dev/htmlzip/">HTML</a></dd>
+        
+        <dd><a href="https://textblob.readthedocs.io/_/downloads/en/dev/epub/">Epub</a></dd>
+        
+      </dl>
+      
+      
+
+      
+      <dl>
+        
+        <!-- These are kept as relative links for internal installs that are http -->
+        <dt>On Read the Docs</dt>
+        <dd>
+          <a href="https://readthedocs.org/projects/textblob/">Project Home</a>
+        </dd>
+        <dd>
+          <a href="https://readthedocs.org/projects/textblob/builds/">Builds</a>
+        </dd>
+        <dd>
+          <a href="https://readthedocs.org/projects/textblob/downloads/">Downloads</a>
+        </dd>
+      </dl>
+      
+
+      
+
+      
+      <dl>
+        <dt>On GitHub</dt>
+        <dd>
+          <a href="https://github.com/sloria/TextBlob/blob/dev/docs/quickstart.rst">View</a>
+        </dd>
+        
+        <dd>
+          <a href="https://github.com/sloria/TextBlob/edit/dev/docs/quickstart.rst">Edit</a>
+        </dd>
+        
+      </dl>
+      
+      
+
+      
+      <dl>
+        <dt>Search</dt>
+        <dd>
+          <div style="padding: 6px;">
+            
+            <form id="flyout-search-form" class="wy-form" target="_blank" action="https://readthedocs.org/projects/textblob/search/" method="get">
+              <input type="text" name="q" placeholder="Search docs">
+              </form>
+          </div>
+        </dd>
+      </dl>
+      
+
+
+
+      <hr>
+      
+        <small>
+          <span>Hosted by <a href="https://readthedocs.org/">Read the Docs</a></span>
+          <span> · </span>
+          <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+        </small>
+      
+
+      
+    </div>
+  </div>
+  
+
+</div>
+</body></html>

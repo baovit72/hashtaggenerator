@@ -1,0 +1,5 @@
+D:\University\Self-Learning\Automation Test - Crawling\Projects\Hashtag Generator From Title\Generator\bin\Debug\Generator.dll
+D:\University\Self-Learning\Automation Test - Crawling\Projects\Hashtag Generator From Title\Generator\bin\Debug\Generator.pdb
+D:\University\Self-Learning\Automation Test - Crawling\Projects\Hashtag Generator From Title\Generator\obj\Debug\Generator.dll
+D:\University\Self-Learning\Automation Test - Crawling\Projects\Hashtag Generator From Title\Generator\obj\Debug\Generator.pdb
+D:\University\Self-Learning\Automation Test - Crawling\Projects\Hashtag Generator From Title\Generator\obj\Debug\Generator.csprojAssemblyReference.cache
