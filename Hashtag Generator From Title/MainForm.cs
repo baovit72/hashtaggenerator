@@ -20,6 +20,7 @@ namespace Hashtag_Generator_From_Title
     {
         #region Properties
         String InputFilePath;
+        String TagInputFilePath;
         HashTagGenerator hashTagGenerator;
         Thread mainThread;
         ThreadStart mainThreadStart;
@@ -46,11 +47,18 @@ namespace Hashtag_Generator_From_Title
                {
                    csv.Configuration.RegisterClassMap<InputMap>();
                    records = csv.GetRecords<Input>().ToList();
+
+               }
+               List<TagInput> tag_records = new List<TagInput>();
+               using (var reader = new StreamReader(TagInputFilePath))
+               using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+               { 
+                   tag_records = csv.GetRecords<TagInput>().ToList();
                }
                for (int i = 0; i < records.Count; i++)
                {
                    Input r = records[i];
-                   List<string> tags = generateHashtag(r.Title);
+                   List<string> tags = generateHashtag(r.Title, tag_records);
                    r.Tag1 = tags[0];
                    r.Tag2 = tags[1];
                    r.Tag3 = tags[2];
@@ -67,24 +75,31 @@ namespace Hashtag_Generator_From_Title
            });
         }
 
-        List<string> generateHashtag(string title)
+        List<string> generateHashtag(string title, List<TagInput> tag_records)
         {
             List<string> results = new List<string>();
             var tags = hashTagGenerator.generate(title, tbKeyword.Text, tbRelevantKeywords.Text.Split('\n').ToList(), tbInsertedKeywords.Text.Split('\n').ToList());
             results.Add(tags[0]);
-            results.Add((tags[1].Length > 0 ? tags[1] + ";" : "") + tags[2]);
-            results.Add((tags[3].Length > 0 ? tags[3] + ";" : "") + (tags[4].Length > 0 ? tags[4] + ";" : "") + tags[5]);
+            results.Add((tags[1].Length > 0 ? tags[1] + "," : "") + tags[2]);
+            results.Add((tags[3].Length > 0 ? tags[3] + "," : "") + (tags[4].Length > 0 ? tags[4] + "," : "") + tags[5]);
             string resultString = "";
 
             foreach (string r in tags)
             {
-                resultString += r.Length > 0 ? r + ";" : "";
+                resultString += r.Length > 0 ? r + "," : "";
             }
-            results.Add(resultString);
+            var words = title.ToLower().Split(' ').Where(t=>t.Length>0).ToList();
+            for (int i = 0; i < words.Count; i++)
+            {
+                resultString += "," + tag_records.Find(t => t.Word.ToLower() == words[i].ToLower())?.Tag??"";
+            }
+
+            results.Add(String.Join(",",resultString.Split(',').Where(r=>r.Trim().Length>0).Select(r=>r.Trim()).Distinct().ToList()));
             return results;
         }
         private void btnBegin_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("Started !!!");
             mainThread?.Abort();
             mainThread = new Thread(mainThreadStart);
             mainThread.Start();
@@ -117,6 +132,15 @@ namespace Hashtag_Generator_From_Title
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             mainThread?.Abort();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                TagInputFilePath = openFileDialog.FileName;
+                lb_tagInput.Text = TagInputFilePath;
+            }
         }
     }
 }

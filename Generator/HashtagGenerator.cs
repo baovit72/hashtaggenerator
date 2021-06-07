@@ -13,21 +13,25 @@ namespace Generator
         Dictionary<char, List<string>> dictionary;
         String germanNouns;
         String frenchNouns;
+        List<String> nounExcluders;
         public HashTagGenerator()
         {
             dictionary = new Dictionary<char, List<string>>();
             germanNouns = File.ReadAllText("Dictionary\\german_nouns.csv").ToLower().Replace(" ", "");
             frenchNouns = File.ReadAllText("Dictionary\\french_nouns.csv").ToLower().Replace(" ", "");
+            nounExcluders = File.ReadAllLines("exclude.csv").Where(i=>i.Length > 0).Select(i=>i.ToLower().Trim()).ToList();
             //Load dictionary
             for (char i = 'A'; i <= 'Z'; i++)
             {
                 dictionary[i] = File.ReadAllLines("Dictionary\\" + i.ToString() + ".csv").Where(w => w.Trim().Length > 0).ToList();
             }
-            Debug.WriteLine("Done loading dictionary");
+            //Debug.WriteLine("Done loading dictionary");
         }
         // Handle word (v.n. ??, handle word -ed,-ing
         public bool isNoun(string word)
         {
+            if (nounExcluders.Contains(word.ToLower()))
+                return false;
             word = word.Replace(" ", "");
             List<string> toBes = new List<string>() { "am", "is", "are", "was", "were", "aint", "ain't", "have", "has", "stay" };
             if (toBes.Contains(word.ToLower()))
@@ -58,8 +62,8 @@ namespace Generator
                                                             || handledRecord.IndexOf(subNounWord) == 0 || handledRecord.IndexOf(subNounWord) == 1
                                                             || handledRecord.IndexOf(subNounWord2) == 0 || handledRecord.IndexOf(subNounWord2) == 1)
                                                     {
-                                                        Debug.WriteLine(record);
-                                                        Debug.WriteLine(handledRecord);
+                                                        //Debug.WriteLine(record);
+                                                        //Debug.WriteLine(handledRecord);
                                                         return true;
                                                     }
                                                     else return false;
@@ -93,8 +97,8 @@ namespace Generator
                                 || handledRecord.IndexOf(subVerbWord) == 0 || handledRecord.IndexOf(subVerbWord) == 1
                                 || handledRecord.IndexOf(subVerbWord2) == 0 || handledRecord.IndexOf(subVerbWord2) == 1)
                         {
-                            Debug.WriteLine(record);
-                            Debug.WriteLine(handledRecord);
+                            //Debug.WriteLine(record);
+                            //Debug.WriteLine(handledRecord);
                             return true;
                         }
                         else return false;
@@ -123,10 +127,10 @@ namespace Generator
                 }
             }
             //One word hashtag
-            result.Add(String.Join(";", nouns.Select(n => n.Key).Where(n => n.ToLower() != keyword.ToLower())));
+            result.Add(String.Join(",", nouns.Select(n => n.Key).Where(n => n.ToLower() != keyword.ToLower())));
             //Two word hashtag
             //Keyword + noun
-            result.Add(String.Join(";", nouns.Select(n => n.Key).Where(n => n.ToLower() != keyword.ToLower() && !relevantKeywords.Contains(n.ToLower())).Select(n => keyword + " " + n)));
+            result.Add(String.Join(",", nouns.Select(n => n.Key).Where(n => n.ToLower() != keyword.ToLower() && !relevantKeywords.Contains(n.ToLower())).Select(n => keyword + " " + n)));
             //noun + noun
             List<string> doubleNouns = new List<string>();
             for (int i = 0; i < nouns.Count - 1; i++)
@@ -138,10 +142,10 @@ namespace Generator
                     doubleNouns.Add(noun.Key + " " + nextNoun.Key);
                 }
             }
-            result.Add(String.Join(";", doubleNouns));
+            result.Add(String.Join(",", doubleNouns));
             //Three word hashtag 
             //Keyword + noun  + noun
-            result.Add(String.Join(";", doubleNouns.Select(d => keyword + " " + d)));
+            result.Add(String.Join(",", doubleNouns.Select(d => keyword + " " + d)));
             //noun + funny + noun
             List<string> doubleFunnyNouns = new List<string>();
             if (insertedKeywords.Count == 0)
@@ -162,7 +166,7 @@ namespace Generator
                     }
                 }
             }
-            result.Add(String.Join(";", doubleFunnyNouns));
+            result.Add(String.Join(",", doubleFunnyNouns));
             //S+V+N
             List<string> subjects = new List<string>() { "i", "you", "he", "she", "it", "they", "we" };
             List<string> svn = new List<string>();
@@ -181,7 +185,7 @@ namespace Generator
                     }
                 }
             }
-            result.Add(String.Join(";", svn));
+            result.Add(String.Join(",", svn));
             return result;
         }
     }

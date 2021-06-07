@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace Hashtag_Generator_From_Title
 {
+    public class TagInput
+    {
+        public string Word { get; set; }
+        public string Tag { get; set; } 
+    }
     public class Input
     {
         public string Title { get; set; }
